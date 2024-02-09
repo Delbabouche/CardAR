@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/2.0.0/zappar-aframe.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <meta charset="utf-8" />
+    <title>A-Frame Business Card Example</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- START OUR A-FRAME SCENE -->
+    <a-scene loading-screen="backgroundColor: #344A60" embedded>
+        <!-- ALLOW USER TO CLICK ON ELEMENTS BY ADDING CURSOR COMPONENT & IDENTIFY RAYCASTER OBJECTS FOR BETTER PERFORMANCE -->
+        <a-camera></a-camera>
+
+        <!-- SET UP OUR EXPERIENCE AS IMAGE TRACKING & GIVE IT AN IMAGE TO TRACK -->
+        <a-entity>
+            <!-- Have a group that will only become visible when the target image comes into view-->
+            <a-entity>
+
+                <!-- ZAPPAR LOGO 3D MODEL (OVER BACKGROUND) SOUND EFFECTS OBTAINED FROM https://www.zapsplat.com - STANDARD LICENSE https://www.zapsplat.com/license-type/standard-license/ -->
+                <a-entity id="bolt" animation-mixer repeat Infinity gltf-model="assets/Rendu/Screen3D.glb" class="collidable" position="0 0 0" scale=".35 .35 .35" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity>
+                <!-- <a-entity animation-mixer repeat Infinity  obj-model="obj: url(assets/Rendu/Screen3D.obj); mtl: url(assets/Rendu/Screen3D.mtl)" class="collidable" position="0 0 0" rotation="0 180 0" scale=".25 .25 .25" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity> -->
+
+
+
+            </a-entity>
+            <!-- END VISIBILITY CHANGER -->
+        </a-entity>
+        <!-- END TRACKING EXPERIENCE -->
+    </a-scene> <!-- END SCENE -->
+
+</body>
+
+</html>
