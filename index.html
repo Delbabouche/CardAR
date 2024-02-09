@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/2.0.0/zappar-aframe.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <meta charset="utf-8" />
+    <title>A-Frame Business Card Example</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+        // Only show our content when the image becomes visible
+        AFRAME.registerComponent("visibility-changer", {
+            init: function () {
+                this.el.setAttribute("visible", false)
+                this.el.sceneEl.addEventListener('zappar-visible', () => this.el.setAttribute("visible", true));
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <!-- START OUR A-FRAME SCENE -->
+    <a-scene loading-screen="backgroundColor: #344A60" embedded arjs>
+         <!-- Ask user for camera permissions, display some text if permission is denied -->
+         <a-entity zappar-permissions-ui id="permissions"></a-entity>
+         <!-- shows a full-page dialog that informs the user they're using an unsupported browser -->
+         <a-entity zappar-compatibility-ui id="compatibility"></a-entity>
+
+        <!-- PRE-LOAD OUR ASSETS FOR PERFORMANCE -->
+        <a-assets>
+            <!-- PLANE BACKGROUND -->
+            <img id="card-plain" src="assets/BusinessCardPlain.png" />
+
+            <!-- MENU ITEMS -->
+            <img id="web-icon" src="assets/WebLaunch.png"/>
+            <img id="facebook-icon" src="assets/Facebook.png"/>
+            <img id="phone-icon" src="assets/Phone.png"/>
+            <!-- MENU ITEM MIXIN -->
+            <a-mixin id="iconProperties" scale="0.4 0.4 0.4" material="alpha-test:0.5" animation="property: scale; to: 0.5 0.5 0.5; dir: alternate; dur: 2000; loop:true;"></a-mixin>
+        </a-assets>
+        <!-- END ASSET PRE-LOADING -->
+
+        <!-- CREATE A-FRAME CAMERA AND REPLACE IT WITH ZAPPAR'S CAMERA -->
+        <!-- ALLOW USER TO CLICK ON ELEMENTS BY ADDING CURSOR COMPONENT & IDENTIFY RAYCASTER OBJECTS FOR BETTER PERFORMANCE -->
+        <a-camera zappar-camera cursor="rayOrigin: mouse; fuse: false;" raycaster="objects: .collidable"></a-camera>
+
+        <!-- SET UP OUR EXPERIENCE AS IMAGE TRACKING & GIVE IT AN IMAGE TO TRACK -->
+        <a-entity zappar-image="target: assets/BusinessCard.zpt">
+            <!-- Have a group that will only become visible when the target image comes into view-->
+            <a-entity visibility-changer>
+
+                <!-- ZAPPAR LOGO 3D MODEL (OVER BACKGROUND) SOUND EFFECTS OBTAINED FROM https://www.zapsplat.com - STANDARD LICENSE https://www.zapsplat.com/license-type/standard-license/ -->
+                <a-entity id="bolt" animation-mixer repeat Infinity gltf-model="assets/Rendu/Screen3D.glb" class="collidable" position="0 0 0" rotation="180 90 90" scale=".7 .7 .7" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity>
+                <!-- <a-entity animation-mixer repeat Infinity  obj-model="obj: url(assets/Rendu/Screen3D.obj); mtl: url(assets/Rendu/Screen3D.mtl)" class="collidable" position="0 0 0" rotation="0 180 0" scale=".25 .25 .25" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity> -->
+
+
+
+            </a-entity>
+            <!-- END VISIBILITY CHANGER -->
+        </a-entity>
+        <!-- END TRACKING EXPERIENCE -->
+    </a-scene> <!-- END SCENE -->
+
+</body>
+
+</html>
