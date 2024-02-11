@@ -19,28 +19,14 @@
     </style>
 </head>
 <body>
-
-    <!-- START OUR A-FRAME SCENE -->
     <a-scene loading-screen="backgroundColor: #344A60" embedded>
-        <!-- ALLOW USER TO CLICK ON ELEMENTS BY ADDING CURSOR COMPONENT & IDENTIFY RAYCASTER OBJECTS FOR BETTER PERFORMANCE -->
         <a-camera></a-camera>
-
-        <!-- SET UP OUR EXPERIENCE AS IMAGE TRACKING & GIVE IT AN IMAGE TO TRACK -->
         <a-entity>
-            <!-- Have a group that will only become visible when the target image comes into view-->
             <a-entity>
-
-                <!-- ZAPPAR LOGO 3D MODEL (OVER BACKGROUND) SOUND EFFECTS OBTAINED FROM https://www.zapsplat.com - STANDARD LICENSE https://www.zapsplat.com/license-type/standard-license/ -->
                 <a-entity id="bolt" animation-mixer repeat Infinity gltf-model="assets/Rendu/Screen3D.glb" class="collidable" position="0 0 0" scale=".35 .35 .35" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity>
-                <!-- <a-entity animation-mixer repeat Infinity  obj-model="obj: url(assets/Rendu/Screen3D.obj); mtl: url(assets/Rendu/Screen3D.mtl)" class="collidable" position="0 0 0" rotation="0 180 0" scale=".25 .25 .25" sound="src: url(assets/zapsplat_laser.mp3); on: click;"></a-entity> -->
-
-
-
             </a-entity>
-            <!-- END VISIBILITY CHANGER -->
         </a-entity>
-        <!-- END TRACKING EXPERIENCE -->
-    </a-scene> <!-- END SCENE -->
+    </a-scene>
 
 </body>
 
